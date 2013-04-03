@@ -12,7 +12,8 @@ my_feeds = {
 
 
 class RSSFetcher(Fetcher):
-    use = 'fetchers.stdlib.OldBroke'
+    # use = 'fetchers.stdlib.OldBroke'
+    use = 'fetchers.reqs.NewShiny'
 
 
 def fetch():
