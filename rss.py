@@ -1,19 +1,25 @@
-import urlparse
+from __future__ import print_function
+from __future__ import unicode_literals
 from reader import RSSFeed
 from fetchers import Fetcher
+
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 
 my_feeds = {
     # WARNING, WARNING! DANGER WILL ROBINSON!
     # THESE ARE BYTE STRINGS!
-    'Toast Driven': 'http://toastdriven.com/feeds/fresh_news/',
-    'Django': 'https://www.djangoproject.com/rss/weblog/',
+    u'Toast Driven': u'http://toastdriven.com/feeds/fresh_news/',
+    u'Django': u'https://www.djangoproject.com/rss/weblog/',
 }
 
 
 class RSSFetcher(Fetcher):
-    # use = 'fetchers.stdlib.OldBroke'
-    use = 'fetchers.reqs.NewShiny'
+    use = u'fetchers.stdlib.OldBroke'
+    # use = u'fetchers.reqs.NewShiny'
 
 
 def fetch():
@@ -39,12 +45,12 @@ def main():
     articles = read(rss_filenames)
 
     for article in articles:
-        print '"%s" (%s): %s...' % (
-            article['title'],
-            urlparse.urlparse(article['link']).netloc,
-            article.get('description', '')[:25]
-        )
+        print(u'"{0}" ({1}): {2}...'.format(
+            article[u'title'],
+            urlparse(article[u'link']).netloc,
+            article.get(u'description', u'')[:25]
+        ))
 
 
-if __name__ == '__main__':
+if __name__ == u'__main__':
     main()
